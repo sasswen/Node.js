@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/vue/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .main {
+            width: 650px;
+            margin: 0 auto;
+            border: 1px solid gainsboro;
+        }
+
+        .nav {
+            width: 650px;
+            height: 50px;
+            background-color: lightseagreen;
+            margin-right: auto;
+            margin-left: auto;
+            position: relative;
+        }
+
+        #nine_layout, #shu_layout {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: 5px;
+        }
+
+        #shu_layout:hover{
+            background-color: orange;
+        }
+        #nine_layout:hover{
+            background-color: orange;
+        }
+        #nine_layout {
+            right: 80px;
+        }
+
+        #shu_layout {
+            right: 20px;
+        }
+        .list{
+            width: 650px;
+            overflow: hidden;
+        }
+        .show{
+            width: 650px;
+            margin-left: 10px;
+        }
+        .show img{
+            width: 300px;
+            height: 300px;
+            margin-left: 10px;
+        }
+
+        .list_two img{
+            width: 200px;
+            height:200px;
+        }
+        .list_two p{
+            position: relative;
+            left: 220px;
+            top:-100px;
+        }
+        .list_two a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="nav">
+        <img v-on:click="showGrade" src="grade.png" id="nine_layout">
+        <img v-on:click="showList" src="list.png" id="shu_layout">
+    </div>
+    <!--列表-->
+    <div class="list">
+        <!--列表中的模板-->
+        <div class="show" v-show="layout">
+            <a v-for="(url,index) in array" :href="array[index].url">
+                <img :src="array[index].image.large" >
+            </a>
+        </div>
+        <div class="list_two" v-show="layin">
+            <a v-for="(url,index) in array" :href="array[index].url">
+                <img :src="array[index].image.small" >
+                <p >{{array[index].title}}</p>
+            </a>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+
+       var app =  new Vue({
+           el: '.main',
+           data: {
+               array : [{
+               "title": "What You Need To Know About CSS Variables",
+               "url": "http://tutorialzine.com/2016/03/what-you-need-to-know-about-css-variables/",
+               "image": {
+                   "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/03/css-variables.jpg",
+                   "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/03/css-variables-150x150.jpg"
+               }
+           },
+               {
+                   "title": "Freebie: 4 Great Looking Pricing Tables",
+                   "url": "http://tutorialzine.com/2016/02/freebie-4-great-looking-pricing-tables/",
+                   "image": {
+                       "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/great-looking-pricing-tables.jpg",
+                       "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/great-looking-pricing-tables-150x150.jpg"
+                   }
+               },
+               {
+                   "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
+                   "url": "http://tutorialzine.com/2016/02/20-interesting-javascript-and-css-libraries-for-february-2016/",
+                   "image": {
+                       "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/interesting-resources-february.jpg",
+                       "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/interesting-resources-february-150x150.jpg"
+                   }
+               },
+               {
+                   "title": "Quick Tip: The Easiest Way To Make Responsive Headers",
+                   "url": "http://tutorialzine.com/2016/02/quick-tip-easiest-way-to-make-responsive-headers/",
+                   "image": {
+                       "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/quick-tip-responsive-headers.png",
+                       "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/quick-tip-responsive-headers-150x150.png"
+                   }
+               },
+               {
+                   "title": "Learn SQL In 20 Minutes",
+                   "url": "http://tutorialzine.com/2016/01/learn-sql-in-20-minutes/",
+                   "image": {
+                       "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/01/learn-sql-20-minutes.png",
+                       "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/01/learn-sql-20-minutes-150x150.png"
+                   }
+               },
+               {
+                   "title": "Creating Your First Desktop App With HTML, JS and Electron",
+                   "url": "http://tutorialzine.com/2015/12/creating-your-first-desktop-app-with-html-js-and-electron/",
+                   "image": {
+                       "large": "http://cdn.tutorialzine.com/wp-content/uploads/2015/12/creating-your-first-desktop-app-with-electron.png",
+                       "small": "http://cdn.tutorialzine.com/wp-content/uploads/2015/12/creating-your-first-desktop-app-with-electron-150x150.png"
+                   }
+               }],
+               layout: true,
+               layin:false
+           },
+           methods:{
+               showGrade:function () {
+                   this.layout = true;
+                   this.layin = false;
+               },
+               showList:function () {
+                   this.layin = true;
+                   this.layout = false;
+               }
+
+           }
+       })
+</script>
+</body>
+</html>
